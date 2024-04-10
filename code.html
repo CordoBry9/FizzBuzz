@@ -2,11 +2,18 @@
 <html lang="en">
 
 <head>
-    <title>APP NAME: A coding challenge</title>
+    <title>FizzBuzz: A coding challenge</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Racing+Sans+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+        
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -30,11 +37,11 @@
 
 </head>
 
-<body data-bac-theme="purple">
+<body data-bac-theme="yellow">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-xxl">
-                <a class="navbar-brand" href="/index.html"> <img src="img/APPNAMELogo.svg" height="30">App Name</a>
+                <a class="navbar-brand" href="/index.html"> <img src="img/FizzBUZZ.svg" height="30">FizzBuzz</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
                     aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,7 +52,7 @@
                             <a class="nav-link" href="/index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/app.html">The App</a>
+                            <a class="nav-link" href="/app.html">FizzBuzz</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/code.html">The Code</a>
@@ -65,26 +72,124 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
+                        // entry point
+                        function getInput() {
                         
-                            let inputBox = document.getElementById('message');
-                            let message = inputBox.value;
+                            //grabs Fizz value that user inputted, specifically the string they inputted instead of whole element with .value
+                            let fizzNumber = document.getElementById('fizzNumber').value;
                         
-                            Swal.fire({
-                                title: "App Name", //change to actual app name
-                                text: message,
-                                icon: "success",
-                                backdrop: false,
-                              });
+                            let buzzNumber = document.getElementById('buzzNumber').value;
+                        
+                            //turns strings into integers/Numbers
+                            fizzNumber = Number(fizzNumber);
+                            buzzNumber = Number(buzzNumber);
+                        
+                            if (isNaN(fizzNumber) || isNaN(buzzNumber)) { //NaN = Not a Number, isNaN checks if the value stored is not a number
+                                //display an error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops!',
+                                    text: 'Please enter valid numbers for FizzBuzz to use.',
+                                    backdrop: false,
+                                });
                             }
+                        
+                            else if ((fizzNumber < 1) || (fizzNumber > 100) || (buzzNumber > 100) || (buzzNumber < 1)) {
+                        
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops!',
+                                    text: 'Please make sure that the numbers are between 1-100.',
+                                    backdrop: false,
+                                });
+                            }
+                        
+                            else {
+                                // display numbers
+                        
+                                // calls generatefizzbuzz, makes its parameters values of 
+                                // fizzNumber nad buzzNumber and can be replaced in the generatedFizzBuzz 
+                                // Function as any other parameter
+                                let generatedFizzBuzz = generateFizzBuzz(fizzNumber, buzzNumber);
+                                displayFizzBuzz(generatedFizzBuzz);
+                            }
+                        }
+                        
+                        
+                        function generateFizzBuzz(fizz, buzz) {
+                        
+                            let numbers = [];
+                        
+                            for (let i = 1; i <= 100; i++) {
+                        
+                        
+                        
+                                if (i % fizz == 0 && i % buzz == 0) {
+                                    numbers.push("fizzbuzz");
+                                }
+                        
+                                else if (i % fizz == 0) {
+                        
+                                    numbers.push("fizz");
+                        
+                                }
+                        
+                                else if (i % buzz == 0) {
+                        
+                                    numbers.push("buzz");
+                                }
+                        
+                                else {
+                        
+                                    numbers.push(i);
+                        
+                                }
+                            }
+                        
+                            return numbers;
+                        }
+                        
+                        
+                        function displayFizzBuzz(fizzbuzzArray) {
+                        
+                            let fbTable = '';
+                        
+                            for (let index = 0; index < fizzbuzzArray.length; index += 1) {
+                                
+                                let className = '';
+                                let number = fizzbuzzArray[index];
+                        
+                                // if (number == 'fizz') {
+                                //     className = 'fizz';
+                                // }
+                                // else if (number == 'buzz') {
+                                //     className = 'buzz';
+                        
+                                // }
+                        
+                                // else if (number == 'fizzbuzz') {
+                                //     className = 'fizzbuzz';
+                        
+                                // }
+                        
+                                fbTable += `trtd class="${number}">${number}/td/tr`;
+                            }
+                        
+                            let tresults = document.getElementById('results');
+                            tresults.innerHTML = fbTable;
+                        
+                        }
+                        
+                        
+                        
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
                 <p>The code is structured in one function.</p>
-                <h5><code>displayMessage()</code></h5>
+                <h5><code>getInput()</code></h5>
                 <p>
-                    The<code> displayMessage </code>function gets the text from the input element and displays it in a Sweet Alert popup.
+                    The<code> getInput </code>function is the entry point for the fizzbuzz.
                 </p>
             </div>
         </div>
@@ -98,7 +203,7 @@
                     &copy; 2024 Bryan Cordova
                 </div>
                 <div class="col text-center">
-                    <img src="/img/APPNAMELogo.svg" height="30">
+                    <img src="/img/FizzBUZZ-Favicon.svg" height="30">
                 </div>
                 <div class="col text-center text-lg-end">
                     <a href="https://github.com/CordoBry9" class="text-decoration-none" target="_blank">

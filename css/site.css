@@ -120,7 +120,23 @@ footer .bi:hover {
     font-size: 3.5rem;
 }
 
-#message {
+.fizz {
 
+    background-color: red !important; 
+    font-weight: 400 !important;
+    font-size: 1rem;
     
+}
+
+.buzz {
+    font-weight: 700 !important;
+    background-color: yellow !important;
+    font-size: 1.5rem;
+}
+
+.fizzbuzz {
+
+    background-color: green !important;
+    font-weight: 900 !important;
+    font-size: 2rem;
 }
