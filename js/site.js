@@ -6,9 +6,12 @@ function getInput() {
 
     let buzzNumber = document.getElementById('buzzNumber').value;
 
+    let numberLimit = document.getElementById('numberLimit').value;
+
     //turns strings into integers/Numbers
     fizzNumber = Number(fizzNumber);
     buzzNumber = Number(buzzNumber);
+    numberLimit = Number(numberLimit)
 
     if (isNaN(fizzNumber) || isNaN(buzzNumber)) { //NaN = Not a Number, isNaN checks if the value stored is not a number
         //display an error message
@@ -20,33 +23,51 @@ function getInput() {
         });
     }
 
-    else if ((fizzNumber < 1) || (fizzNumber > 100) || (buzzNumber > 100) || (buzzNumber < 1)) {
+    else if ((fizzNumber < 1) || (fizzNumber > 1000) || (buzzNumber > 1000) || (buzzNumber < 1)) {
 
         Swal.fire({
             icon: 'error',
             title: 'Oops!',
-            text: 'Please make sure that the numbers are between 1-100.',
+            text: 'Please make sure that the numbers are between 1-1000.',
             backdrop: false,
         });
-    }
 
+
+    }
+    else if (numberLimit < 0 || numberLimit > 1000) {
+
+        swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            backdrop: false,
+            text: 'Please make sure that the numbers are between 1-1000.',
+        });
+    }
+    else if (numberLimit < fizzNumber || numberLimit < buzzNumber) {
+        swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            backdrop: false,
+            text: `Please set a limit greater than the fizzbuzz values.`
+        });
+    }
     else {
         // display numbers
 
         // calls generatefizzbuzz, makes its parameters values of 
         // fizzNumber nad buzzNumber and can be replaced in the generatedFizzBuzz 
         // Function as any other parameter
-        let generatedFizzBuzz = generateFizzBuzz(fizzNumber, buzzNumber);
+        let generatedFizzBuzz = generateFizzBuzz(fizzNumber, buzzNumber, numberLimit);
         displayFizzBuzz(generatedFizzBuzz);
     }
 }
 
 
-function generateFizzBuzz(fizz, buzz) {
+function generateFizzBuzz(fizz, buzz, limit) {
 
     let numbers = [];
 
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= limit; i++) {
 
 
 
@@ -81,7 +102,7 @@ function displayFizzBuzz(fizzbuzzArray) {
     let fbTable = '';
 
     for (let index = 0; index < fizzbuzzArray.length; index += 1) {
-        
+
         let className = '';
         let number = fizzbuzzArray[index];
 
