@@ -100,6 +100,7 @@ function generateFizzBuzz(fizz, buzz, limit) {
 function displayFizzBuzz(fizzbuzzArray) {
 
     let fbTable = '';
+    // let j = 1;
 
     for (let index = 0; index < fizzbuzzArray.length; index += 1) {
 
@@ -120,6 +121,11 @@ function displayFizzBuzz(fizzbuzzArray) {
         // }
 
         fbTable += `<tr class="${number}"><td class="${number}">${number}</td></tr>`;
+
+        // if (j % 5 == 0) {
+        //     fbTable += '</tr> <td>'
+        // }
+
     }
 
     let tresults = document.getElementById('results');

@@ -174,7 +174,7 @@
                         
                             let fbTable = '';
                         
-                            for (let index = 0; index < fizzbuzzArray.length; index += 1) {
+                            for (let index = 0; index &lt; fizzbuzzArray.length; index += 1) {
                                 
                                 let className = '';
                                 let number = fizzbuzzArray[index];
@@ -192,7 +192,7 @@
                         
                                 // }
                         
-                                fbTable += `tr class="${number}">td class="${number}">${number}/td>/tr>`;
+                                fbTable += `&lt;tr class="${number}">&lt;td class="${number}">${number}&lt;/td>&lt;/tr>`;
                                 //issue with prism making td and trs into actual lines of code
                             }
                         
