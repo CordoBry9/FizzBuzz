@@ -104,7 +104,7 @@ function displayFizzBuzz(fizzbuzzArray) {
 
     for (let index = 0; index < fizzbuzzArray.length; index += 1) {
 
-        let className = '';
+        // let className = '';
         let number = fizzbuzzArray[index];
 
         // if (number == 'fizz') {
